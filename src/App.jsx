@@ -1,7 +1,6 @@
 import SideBar from "./conponents/SideBar";
 import NewProject from "./conponents/NewProject";
 import NoProject from "./conponents/NoProject";
-import {state} from "react"
 import { useState } from "react";
 function App() {
   const [projectState,setProjectState]=useState({
@@ -12,13 +11,28 @@ function App() {
   const handlestartAddProject=()=>{
     setProjectState((previous)=>{return{...previous,selectedProjectId:null}})
   }
+
+  const handleAddProject=(projectData)=>{
+    setProjectState((previous)=>{
+      const newProject={
+        ...projectData,
+        id:Math.random()
+      }
+      return{
+      ...previous,
+      project:[...previous.project,newProject]
+      }
+    }
+   )
+  }
+  console.log(projectState)
   let content;
 
   if(projectState.selectedProjectId===undefined){
       content=<NoProject onStartAddProject={handlestartAddProject}/>
   }
   else{
-      content= <NewProject/>
+      content= <NewProject onAdd={handleAddProject}/>
   }
   return (
     <main className="h-screen my-8 flex gap-8">
