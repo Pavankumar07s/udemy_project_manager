@@ -11,6 +11,9 @@ function App() {
   const handlestartAddProject=()=>{
     setProjectState((previous)=>{return{...previous,selectedProjectId:null}})
   }
+  const handlecancleAddProject=()=>{
+    setProjectState((previous)=>{return{...previous,selectedProjectId:undefined}})
+  }
 
   const handleAddProject=(projectData)=>{
     let ProjectId=Math.random()*100;
@@ -33,7 +36,7 @@ function App() {
       content=<NoProject onStartAddProject={handlestartAddProject}/>
   }
   else{
-      content= <NewProject onAdd={handleAddProject}/>
+      content= <NewProject onAdd={handleAddProject} onCancle={handlecancleAddProject}/>
   }
   return (
     <main className="h-screen my-8 flex gap-8">
